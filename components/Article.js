@@ -114,3 +114,50 @@ const data = [
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
+function articleMaker(articleObj){
+  // Article Container
+  const article = document.createElement('div')
+  article.classList.add('article')
+  console.log(articleObj);
+  
+  // Article Title
+  const articleTitle = document.createElement('h2')
+  articleTitle.textContent = `${articleObj.title}`
+  article.appendChild(articleTitle)
+
+  // Article Date
+  const articleDate = document.createElement('p')
+  articleDate.classList.add('date')
+  articleDate.textContent = `${articleObj.date}`
+  article.appendChild(articleDate)
+
+  // Article Paragraphs
+  // Three Paragraphs go here
+for(const key in articleObj){
+  // Iterating through each object key in search of paragraphs.
+  // When a paragrph is found, it is then created within the DOM
+  if (key.includes('aragraph')) {
+      const newPara = document.createElement('p')
+      newPara.textContent = `${articleObj[key]}`
+      article.appendChild(newPara)
+    }
+}
+
+// Article Button
+  const expandBtn = document.createElement('span')
+  expandBtn.classList.add('expandButton')
+  expandBtn.textContent = '+'
+  article.appendChild(expandBtn)
+  expandBtn.addEventListener('click', ()=>{
+    article.classList.toggle('article-open')
+  })
+
+  return article
+}
+
+// Creates a new article from the data array and appends it to the articles div in the DOM
+const articles = document.querySelector('.articles')
+data.forEach(item =>{
+  const newArticle = articleMaker(item)
+  articles.appendChild(newArticle)
+})
